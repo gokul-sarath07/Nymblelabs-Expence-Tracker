@@ -1,0 +1,31 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="{% static '/css/accounts/login.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container-body">
+    <div class="login-form-body">
+      <div class="login-heading-div">
+        <h3>Login</h3>
+      </div>
+      {% include 'partials/_messages.html' %}
+      <form class="login-form" action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="login-form-inputs-div">
+          <input class="login-form-username-input" type="text" name="username" placeholder="Username">
+          <input class="login-form-password-input" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="login-form-submit-div">
+          <input class="btn" type="submit" value="Login">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

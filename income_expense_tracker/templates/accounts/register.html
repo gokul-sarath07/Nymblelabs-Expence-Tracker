@@ -1,0 +1,56 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block css_link %}
+  <link rel="stylesheet" href="{% static '/css/accounts/register.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container-body">
+    <div class="register-form-body">
+      <div class="register-heading-div">
+        <h3>Register</h3>
+      </div>
+      {% include 'partials/_messages.html' %}
+      <form class="register-form" action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="register-form-inputs-div">
+          <input class="register-form-username-input"
+                 type="text"
+                 name="username"
+                 value="{{fieldValues.username}}"
+                 placeholder="Username" required>
+          <div class="invalid-feedback">
+            <p class=" invalid-username-feedback"></p>
+          </div>
+          <input class="register-form-email-input"
+                 type="email"
+                 name="email"
+                 value="{{fieldValues.email}}"
+                 placeholder="Email" required>
+          <div class="invalid-feedback">
+            <p class="invalid-email-feedback"></p>
+          </div>
+          <input class="register-form-password-input"
+                 type="password"
+                 name="password"
+                 placeholder="Password" required>
+          <div class="invalid-feedback">
+            <p class="invalid-password-feedback"></p>
+          </div>
+        </div>
+        <div class="register-form-submit-div">
+          <input class="btn submit-btn" type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script_link %}
+  <script type="text/javascript" src="{% static '/js/accounts/register.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,113 @@
+:root {
+  --background: #0F0F0F;  /* black */
+  --button: #E36139;  /* orange */
+  --background_heading: #4A8B85;  /* green */
+  --white: #fff;  /* white */
+  --blackTwo: #212529
+}
+
+body {
+  overflow: hidden;
+}
+
+.navlinks {
+  display: flex;
+}
+
+.container-body {
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background);
+}
+
+.register-form-body {
+  display: flex;
+  flex-direction: column;
+  background: var(--blackTwo);
+  width: 400px;
+  min-width: 385px;
+  height: 450px;
+  min-height: 400px;
+  border-radius: 5%;
+  backdrop-filter: blur(5px);
+}
+
+.register-heading-div {
+  width: 100%;
+  height: 20%;
+  min-height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-heading-div h3 {
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.register-form {
+  width: 100%;
+  height: calc(100% - 20%);
+  min-height: calc(100% - 40%);
+}
+
+.register-form-inputs-div {
+  width: 100%;
+  height: calc(100% - 20%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form-inputs-div input {
+  width: 80%;
+  height: 30px;
+  letter-spacing: 2px;
+  padding-left: 5px;
+  border: none;
+  border-bottom: 2px solid var(--white);
+  outline: none;
+  background: transparent;
+  color: var(--white);
+}
+
+.register-form-inputs-div div {
+  width: 80%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.register-form-inputs-div div p {
+  margin-top: 10px;
+  padding-left: 5px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.register-form-submit-div {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-form-submit-div input {
+  background: var(--button);
+  letter-spacing: 1px;
+  border-radius: 10px;
+  transition: 0.3s;
+  color: var(--white);
+}
+
+.register-form-submit-div input:hover {
+  transform: translateY(-7px);
+  color: var(--white);
+}
