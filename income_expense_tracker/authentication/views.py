@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 class RegistrationView(View):
 
     def get(self, request):
-        return render(request, 'accounts/register.html')
+        return render(request, 'authentication/register.html')
 
     def post(self, request):
         username = request.POST['username']
@@ -26,15 +26,15 @@ class RegistrationView(View):
                 if not User.objects.filter(email=email).exists():
                     if len(password) < 6:
                         messages.error(request, "Password must be atleast 6 characters long")
-                        return render(request, 'accounts/register.html', context)
+                        return render(request, 'authentication/register.html', context)
                     user = User.objects.create_user(username=username, email=email)
                     user.set_password(password)
                     user.save()
                     messages.success(request, "Account successfully created")
-                    return render(request, 'accounts/register.html')
+                    return render(request, 'authentication/register.html')
         else:
             messages.error(request, "Please fill all fields.")
-            return render(request, 'accounts/register.html', context)
+            return render(request, 'authentication/register.html', context)
 
 
 class UsernameValidationView(View):
@@ -85,7 +85,7 @@ class PasswordValidationView(View):
 class LoginView(View):
 
     def get(self, request):
-        return render(request, 'accounts/login.html')
+        return render(request, 'authentication/login.html')
 
     def post(self, request):
         username = request.POST['username']
@@ -98,9 +98,9 @@ class LoginView(View):
                 messages.success(request, f"Welcome {username}, you are now logged in.")
                 return redirect('expenses')
             messages.error(request, "Please check your username or password.")
-            return render(request, 'accounts/login.html')
+            return render(request, 'authentication/login.html')
         messages.error(request, "Please fill all fields.")
-        return render(request, 'accounts/login.html')
+        return render(request, 'authentication/login.html')
 
 
 class LogoutView(View):

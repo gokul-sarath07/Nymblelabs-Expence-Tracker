@@ -16,7 +16,7 @@ usernameField.addEventListener('keyup', (e) => {
 
   if (usernameValue.length > 0) {
 
-    fetch('/accounts/validate-username', {
+    fetch('/authentication/validate-username', {
       body: JSON.stringify({
         username: usernameValue
       }),
@@ -45,7 +45,7 @@ emailField.addEventListener('keyup', (e) => {
 
   if (emailValue.length > 0) {
 
-    fetch('/accounts/validate-email', {
+    fetch('/authentication/validate-email', {
       body: JSON.stringify({
         email: emailValue
       }),
@@ -79,7 +79,7 @@ passwordField.addEventListener('keyup', (e) => {
   }
 
   if (passwordValue.length > 0 && passwordValue.length < 6) {
-    fetch('/accounts/validate-password', {
+    fetch('/authentication/validate-password', {
       body: JSON.stringify({
         password: passwordValue
       }),
