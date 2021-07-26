@@ -10,7 +10,7 @@ from django.http import JsonResponse
 @login_required(login_url="/authentication/login")
 def index(request):
     categories = Category.objects.all()
-    expenses = Expense.objects.filter(owner=request.user)
+    expenses = Expense.objects.filter(owner=request.user).order_by('-date')
     paginator = Paginator(expenses, 5)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator, page_number)
@@ -102,7 +102,7 @@ def delete_expense(request, id):
 def filter_expenses(request):
     if request.method == "POST":
         search_str = json.loads(request.body).get('filter_by')
-        expenses = Expense.objects.filter(category=search_str, owner=request.user)
+        expenses = Expense.objects.filter(category=search_str, owner=request.user).order_by('-date')
         data = expenses.values()
         # return the list of values. Since JsonResponse usually sends dict type,
         # we set safe=False which allows list to be send
