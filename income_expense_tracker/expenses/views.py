@@ -107,6 +107,7 @@ def delete_expense(request, id):
     messages.success(request, "Expense deleted.")
     return redirect('expenses')
 
+
 def filter_expenses(request):
     if request.method == "POST":
         search_str = json.loads(request.body).get('filter_by')

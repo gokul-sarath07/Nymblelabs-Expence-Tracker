@@ -4,10 +4,13 @@ import datetime
 import calendar
 from django.http import JsonResponse
 from django.db.models.functions import ExtractWeek
+from django.contrib.auth.decorators import login_required
 
 
+@login_required(login_url="/authentication/login")
 def stats_view(request):
     return render(request, 'report/index.html')
+
 
 def get_current_month_start_and_end_date():
     todays_date = datetime.date.today()
@@ -16,6 +19,7 @@ def get_current_month_start_and_end_date():
     start_date = datetime.date(int(year), int(month), 1)
     end_date = datetime.date(int(year), int(month), last_day_of_month)
     return start_date, end_date
+
 
 def category_summery(request):
     start_date, end_date = get_current_month_start_and_end_date()

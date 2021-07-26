@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from expenses.models import Expense
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
+@login_required(login_url="/authentication/login")
 def index(request):
     expenses = Expense.objects.filter(owner=request.user)
     data = expenses.values()
