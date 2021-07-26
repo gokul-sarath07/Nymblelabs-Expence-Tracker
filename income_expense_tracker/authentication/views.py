@@ -96,7 +96,7 @@ class LoginView(View):
             if user:
                 login(request, user)
                 messages.success(request, f"Welcome {username}, you are now logged in.")
-                return redirect('expenses')
+                return redirect('home')
             messages.error(request, "Please check your username or password.")
             return render(request, 'authentication/login.html')
         messages.error(request, "Please fill all fields.")

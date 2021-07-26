@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Reports
+{% endblock %}
+
+{% block content %}
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-10">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Reports</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Summery</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <canvas id="myChartOne" width="150" height="150"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="myChartTwo" width="150" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script_link %}
+  <script type="text/javascript" src="{% static 'js/report/stats.js' %}"></script>
+{% endblock %}

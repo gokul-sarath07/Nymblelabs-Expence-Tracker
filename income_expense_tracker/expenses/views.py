@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
 
+
 @login_required(login_url="/authentication/login")
 def index(request):
     categories = Category.objects.all()
@@ -32,8 +33,11 @@ def add_expense(request):
     if request.method == "POST":
         amount = request.POST['amount']
         if not amount:
-            print("TIMEEEEEEEEEE", datetime.utcnow())
             messages.error(request, "Please add an amount.")
+            return render(request, 'expenses/add_expense.html', context)
+
+        if int(amount) < 0:
+            messages.error(request, "Please add a positive number.")
             return render(request, 'expenses/add_expense.html', context)
 
         description = request.POST['description']
@@ -71,6 +75,10 @@ def edit_expense(request, id):
         if not amount:
             messages.error(request, "Please add an amount.")
             return render(request, 'expenses/edit_expense.html', context)
+
+        if int(amount) < 0:
+            messages.error(request, "Please add a positive number.")
+            return render(request, 'expenses/add_expense.html', context)
 
         description = request.POST['description']
         category = request.POST['category']

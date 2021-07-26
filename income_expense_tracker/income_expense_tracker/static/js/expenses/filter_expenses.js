@@ -13,7 +13,7 @@ filterField.addEventListener('change', (e) => {
   if (filterValue !== "Default") {
     paginationContainer.style.display = 'none';
     tableBody.innerHTML = "";
-    fetch('/filter-expenses', {
+    fetch('/expenses/filter-expenses', {
       body: JSON.stringify({ filter_by: filterValue }),
       method: "POST"
     })
