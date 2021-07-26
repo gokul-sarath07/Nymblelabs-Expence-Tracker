@@ -15,7 +15,9 @@
       <div class="login-heading-div">
         <h3>Login</h3>
       </div>
-      {% include 'partials/_messages.html' %}
+      <div class="container">
+        {% include 'partials/_messages.html' %}
+      </div>
       <form class="login-form" action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="login-form-inputs-div">

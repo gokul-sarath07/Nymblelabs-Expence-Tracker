@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.models import User
 from django.contrib import messages
-import json
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from validate_email import validate_email
-from django.contrib.auth import authenticate, login, logout
+import json
+
 
 class RegistrationView(View):
 
@@ -25,9 +26,13 @@ class RegistrationView(View):
             if not User.objects.filter(username=username).exists():
                 if not User.objects.filter(email=email).exists():
                     if len(password) < 6:
-                        messages.error(request, "Password must be atleast 6 characters long")
-                        return render(request, 'authentication/register.html', context)
-                    user = User.objects.create_user(username=username, email=email)
+                        messages.error(request,
+                                       "Password must be atleast 6 characters")
+                        return render(request, 'authentication/register.html',
+                                      context)
+
+                    user = User.objects.create_user(username=username,
+                                                    email=email)
                     user.set_password(password)
                     user.save()
                     messages.success(request, "Account successfully created")
@@ -45,7 +50,8 @@ class UsernameValidationView(View):
 
         if not username.isalnum():
             return JsonResponse({
-                'username_error': 'Username should only contain alphanumeric characters'
+                'username_error':
+                    'Username should only contain alphanumeric characters'
             }, status=400)
         if User.objects.filter(username=username).exists():
             return JsonResponse({
@@ -78,9 +84,10 @@ class PasswordValidationView(View):
         password = data['password']
         if len(password) < 6:
             return JsonResponse({
-                'password_error': 'Password must be atleast 6 characters long'
+                'password_error': 'Passwords must be atleast 6 characters.'
             }, status=400)
         return JsonResponse({'password_error': True}, status=200)
+
 
 class LoginView(View):
 
@@ -95,9 +102,9 @@ class LoginView(View):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                messages.success(request, f"Welcome {username}, you are now logged in.")
+                messages.success(request, "You are now logged in.")
                 return redirect('home')
-            messages.error(request, "Please check your username or password.")
+            messages.error(request, "Incorrect credentials, Try again.")
             return render(request, 'authentication/login.html')
         messages.error(request, "Please fill all fields.")
         return render(request, 'authentication/login.html')

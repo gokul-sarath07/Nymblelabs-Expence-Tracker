@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from expenses.models import Expense
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+
+from expenses.models import Expense
 
 
 @login_required(login_url="/authentication/login")

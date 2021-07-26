@@ -1,10 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from expenses.models import Expense
+from django.http import JsonResponse
 import datetime
 import calendar
-from django.http import JsonResponse
-from django.db.models.functions import ExtractWeek
-from django.contrib.auth.decorators import login_required
+
+from expenses.models import Expense
 
 
 @login_required(login_url="/authentication/login")
@@ -23,7 +23,9 @@ def get_current_month_start_and_end_date():
 
 def category_summery(request):
     start_date, end_date = get_current_month_start_and_end_date()
-    expenses = Expense.objects.filter(date__gte=start_date, date__lte=end_date, owner=request.user).order_by('-date')
+    expenses = Expense.objects.filter(date__gte=start_date,
+                                      date__lte=end_date,
+                                      owner=request.user).order_by('-date')
     final_form = {}
 
     def get_category(expense):
@@ -45,13 +47,19 @@ def category_summery(request):
 
 def weekly_summery(request):
     start_date, end_date = get_current_month_start_and_end_date()
-    expenses = Expense.objects.filter(date__gte=start_date, date__lte=end_date, owner=request.user).order_by('-date')
+    expenses = Expense.objects.filter(date__gte=start_date,
+                                      date__lte=end_date,
+                                      owner=request.user).order_by('-date')
 
     start_year, start_month, start_day = map(int, str(start_date).split('-'))
     end_year, end_month, end_day = map(int, str(end_date).split('-'))
 
-    start_week_number = datetime.date(start_year, start_month, start_day).isocalendar()[1]
-    end_week_number = datetime.date(end_year, end_month, end_day).isocalendar()[1]
+    start_week_number = datetime.date(start_year,
+                                      start_month,
+                                      start_day).isocalendar()[1]
+    end_week_number = datetime.date(end_year,
+                                    end_month,
+                                    end_day).isocalendar()[1]
     total_weeks = 1 + end_week_number - start_week_number
 
     final_form = {}
@@ -63,7 +71,6 @@ def weekly_summery(request):
                 if week_string not in final_form:
                     final_form[week_string] = 0
                 final_form[week_string] += item.amount
-
 
     for week_number in range(total_weeks):
         week_data = expenses.filter(date__week=start_week_number + week_number)

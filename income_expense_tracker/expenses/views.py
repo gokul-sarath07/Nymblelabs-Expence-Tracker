@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Expense, Category
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-import json
 from django.http import JsonResponse
+import json
+
+from .models import Expense, Category
 
 
 @login_required(login_url="/authentication/login")
@@ -87,11 +88,11 @@ def edit_expense(request, id):
         if not date:
             date = now().date()
 
-        expense.amount=amount
-        expense.date=date
-        expense.category=category
-        expense.description=description
-        expense.owner=request.user
+        expense.amount = amount
+        expense.date = date
+        expense.category = category
+        expense.description = description
+        expense.owner = request.user
         expense.save()
 
         messages.success(request, "Expense updated successfully.")
@@ -111,8 +112,10 @@ def delete_expense(request, id):
 def filter_expenses(request):
     if request.method == "POST":
         search_str = json.loads(request.body).get('filter_by')
-        expenses = Expense.objects.filter(category=search_str, owner=request.user).order_by('-date')
+        expenses = Expense.objects.filter(category=search_str,
+                                          owner=request.user).order_by('-date')
         data = expenses.values()
-        # return the list of values. Since JsonResponse usually sends dict type,
-        # we set safe=False which allows list to be send
+
+        # return the list of values. Since JsonResponse usually
+        # sends dict type, we set safe=False which allows list to be send
         return JsonResponse(list(data), safe=False)

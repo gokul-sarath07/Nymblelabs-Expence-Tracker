@@ -15,7 +15,9 @@
       <div class="register-heading-div">
         <h3>Register</h3>
       </div>
-      {% include 'partials/_messages.html' %}
+      <div class="container">
+        {% include 'partials/_messages.html' %}
+      </div>
       <form class="register-form" action="{% url 'register' %}" method="POST">
         {% csrf_token %}
         <div class="register-form-inputs-div">
