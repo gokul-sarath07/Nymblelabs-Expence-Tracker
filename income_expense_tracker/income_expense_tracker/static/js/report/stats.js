@@ -47,6 +47,7 @@ const renderChart = (labels, data, chartId, heading) => {
   });
 };
 
+// Function that updates the category amount.
 const getChartDataForCategory = () => {
   fetch('/report/category-summery')
     .then(res => res.json())
@@ -59,6 +60,7 @@ const getChartDataForCategory = () => {
     })
 }
 
+// Function that updates the weekly amount.
 const getChartDataForWeekly = () => {
   fetch('/report/weekly-summery')
     .then(res => res.json())

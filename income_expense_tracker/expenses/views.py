@@ -10,7 +10,7 @@ from .models import Expense, Category
 
 
 # This function can only be accessed after logging in.
-@login_required(login_url="/authentication/login")
+@login_required
 def index(request):
     """This function deals with expenses template functionality."""
 
@@ -36,7 +36,7 @@ def index(request):
 
 
 # This function can only be accessed after logging in.
-@login_required(login_url="/authentication/login")
+@login_required
 def add_expense(request):
     """This function deals with add expenses template functionality."""
 
@@ -89,7 +89,7 @@ def add_expense(request):
 
 
 # This function can only be accessed after logging in.
-@login_required(login_url="/authentication/login")
+@login_required
 def edit_expense(request, id):
     """This function deals with edit expenses template functionality."""
 
@@ -145,7 +145,7 @@ def edit_expense(request, id):
 
 
 # This function can only be accessed after logging in.
-@login_required(login_url="/authentication/login")
+@login_required
 def delete_expense(request, id):
     """This function deals with delete expenses template functionality."""
 

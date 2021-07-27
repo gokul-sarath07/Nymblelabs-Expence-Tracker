@@ -5,7 +5,7 @@ from expenses.models import Expense
 
 
 # This function can only be accessed after logging in.
-@login_required(login_url="/authentication/login")
+@login_required
 def index(request):
     """This function renders the home page with context data."""
 
