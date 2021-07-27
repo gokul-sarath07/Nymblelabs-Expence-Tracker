@@ -49,7 +49,7 @@ def add_expense(request):
     }
     # Checks if request method is POST.
     if request.method == "POST":
-        amount = request.POST['amount'] # Gets amount from request.
+        amount = request.POST['amount']  # Gets amount from request.
         # Checks if amount is empty.
         if not amount:
             # Sends error message to user for empty field.
@@ -135,7 +135,7 @@ def edit_expense(request, id):
         expense.category = category
         expense.description = description
         expense.owner = request.user
-        expense.save() # Saves the record.
+        expense.save()  # Saves the record.
 
         # Sends success message to user for successfully updation.
         messages.success(request, "Expense updated successfully.")

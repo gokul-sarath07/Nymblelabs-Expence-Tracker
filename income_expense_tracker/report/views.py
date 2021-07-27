@@ -60,7 +60,7 @@ def category_summery(request):
         A utility function that returns total sum of amount of a given category
         from filtered Expense Model.
         """
-        totalAmount = 0 # amount variable.
+        totalAmount = 0  # amount variable.
         # Gets the required category datas from filtered expense queryset.
         filter_expenses_by_category = expenses.filter(category=category)
         # For loop that iterates over filter_expenses_by_category and
