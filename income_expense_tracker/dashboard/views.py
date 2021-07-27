@@ -18,7 +18,8 @@ def index(request):
     # For loop that iterates over data list and adds amount to totalAmount.
     for value in data:
         totalAmount += value['amount']
-
+    # formating the total amount value.
+    totalAmount = "{:,}".format(totalAmount)
     # variable value mapping that is passed to the home template.
     context = {
         "amount": totalAmount,

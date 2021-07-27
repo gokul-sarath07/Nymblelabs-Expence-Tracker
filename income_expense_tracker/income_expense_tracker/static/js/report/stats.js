@@ -55,7 +55,7 @@ const getChartDataForCategory = () => {
       const category_data = result.expense_category_data
       const [labels, data] = [Object.keys(category_data), Object.values(category_data)]
       chartId = "myChartOne";
-      heading = "Current Months Expenses per Category";
+      heading = "Current Month Expenses per Category";
       renderChart(labels, data, chartId, heading);
     })
 }
@@ -68,7 +68,7 @@ const getChartDataForWeekly = () => {
       const weekly_data = result.expense_weekly_data
       const [labels, data] = [Object.keys(weekly_data), Object.values(weekly_data)]
       chartId = "myChartTwo";
-      heading = "Current Months Expenses per Week";
+      heading = "Current Month Expenses per Week";
       renderChart(labels, data, chartId, heading);
     })
 }
