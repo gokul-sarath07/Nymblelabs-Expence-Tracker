@@ -5,6 +5,8 @@ from .views import RegistrationView, UsernameValidationView, \
                    EmailValidationView, PasswordValidationView, \
                    LoginView, LogoutView
 
+
+"""Url patterns for authentication views."""
 urlpatterns = [
     path('register', RegistrationView.as_view(), name='register'),
     path('login', LoginView.as_view(), name='login'),

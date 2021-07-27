@@ -1,7 +1,7 @@
 const renderChart = (labels, data, chartId, heading) => {
   var ctx = document.getElementById(chartId).getContext('2d');
   var myChart = new Chart(ctx, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
           labels: labels,
           datasets: [{
