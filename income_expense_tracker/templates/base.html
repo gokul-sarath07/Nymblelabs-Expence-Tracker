@@ -38,7 +38,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- Sidebar -->
-        {% include 'partials/_sidebar.html' %}
+        {% block sidebar %} {% endblock %}
         <!-- Main Content Info -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           {% block content %}
@@ -48,7 +48,6 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="{% static '/js/partials/_sidebar.js' %}"></script>
     {% block script_link %} {% endblock %}
   </body>
 </html>
