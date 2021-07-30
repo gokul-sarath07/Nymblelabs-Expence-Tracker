@@ -1,9 +1,32 @@
 {% if messages %}
 <div class="messages">
     {% for message in messages %}
-    <div {% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>
+    <div {% if message.tags %} class="msg-tag
+                                      alert
+                                      alert-sm
+                                      alert-{{ message.tags }}" {% endif %}>
         {{ message }}
+        <a href="" class="close-msg float-end">&times;</a>
     </div>
     {% endfor %}
 </div>
+
+  <script type="text/javascript">
+    const messagesDelay = () => {
+      const messagesBody = document.querySelector('.messages');
+      setTimeout(() => {
+        messagesBody.style.visibility = "hidden";
+        messagesBody.style.opacity = "0";
+        messagesBody.style.transition = "visibility 0s 2s, opacity 2s linear";
+      }, 10000);
+      setTimeout(() => {
+        messagesBody.style.display = 'none';
+      }, 12000);
+      const messagesCloseBtn = document.querySelector('.close-msg');
+      messagesCloseBtn.addEventListener('click', () => {
+          messagesBody.style.display = 'none';
+      })
+    }
+    messagesDelay();
+  </script>
 {% endif %}
