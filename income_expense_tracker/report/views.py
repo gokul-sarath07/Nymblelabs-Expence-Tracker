@@ -103,7 +103,7 @@ def weekly_summery(request):
     # Gets the week number of the start_date.
     start_week_number = datetime.date(start_year,
                                       start_month,
-                                      start_day).isocalendar()[1]
+                                      start_day).isocalendar()[1] + 1
     # Gets the week number of the end_date.
     end_week_number = datetime.date(end_year,
                                     end_month,

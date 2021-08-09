@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  Expense
+  Admin
 {% endblock %}
 
 {% block sidebar %}
@@ -16,7 +16,7 @@
           <span class="title">Dashboard</span>
         </a>
       </li>
-      <li class="list active" id="expenses_nav">
+      <li class="list" id="expenses_nav">
         <b></b>
         <b></b>
         <a href="{% url 'expenses' %}">
@@ -33,7 +33,7 @@
         </a>
       </li>
       {% if user.is_superuser %}
-        <li class="list">
+        <li class="list active">
           <b></b>
           <b></b>
           <a href="{% url 'admin_dashboard' %}">
@@ -52,15 +52,13 @@
       <div class="col-md-10">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'expenses' %}">Expenses</a></li>
-            <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+            <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
           </ol>
         </nav>
       </div>
-      <div class="col-md-2">
-        <a href="{% url 'add-expense' %}" class="btn btn-primary">Add Expense</a>
-      </div>
     </div>
+
     <div class="container my-4">
       {% include 'partials/_messages.html' %}
       <div class="row">
@@ -69,10 +67,10 @@
           <div class="form-group" style="display: flex; flex-direction: row; align-items: center;">
             <span>Filter: </span>
             <span style="color: white;">-</span>
-            <select class="form-control my-3" name="category" id="filter-category">
+            <select class="form-control my-3" name="username" id="filter-users">
               <option value="Default">Default</option>
-              {% for category in categories %}
-                <option name="category" value="{{category.name}}">{{category.name}}</option>
+              {% for user in users %}
+                <option name="username" value="{{ user.username }}">{{ user.username }}</option>
               {% endfor %}
             </select>
           </div>
@@ -86,6 +84,7 @@
           <table class="table table-stripped table-hover">
             <thead>
               <tr>
+                <th>Owner</th>
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -96,6 +95,7 @@
             <tbody>
               {% for expense in page_obj %}
                 <tr>
+                  <td>{{expense.owner.username}}</td>
                   <td>{{expense.amount}}</td>
                   <td>{{expense.category}}</td>
                   <td>{{expense.description}}</td>
@@ -111,6 +111,7 @@
           <table class="table table-stripped table-hover">
             <thead>
               <tr>
+                <th>Owner</th>
                 <th>Amount</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -150,5 +151,5 @@
 {% endblock %}
 
 {% block script_link %}
-  <script type="text/javascript" src="{% static 'js/expenses/filter_expenses.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/admin_dashboard/filter_users.js' %}"></script>
 {% endblock %}

@@ -6,7 +6,9 @@
                                       alert-sm
                                       alert-{{ message.tags }}" {% endif %}>
         {{ message }}
-        <a href="" class="close-msg float-end">&times;</a>
+        <!-- <a href="" class="close-msg float-end">&times;</a> -->
+        <a href="" class="close-msg float-end"><ion-icon name="close-outline"></ion-icon></a>
+
     </div>
     {% endfor %}
 </div>

@@ -31,6 +31,16 @@
           <span class="title">Reports</span>
         </a>
       </li>
+      {% if user.is_superuser %}
+        <li class="list">
+          <b></b>
+          <b></b>
+          <a href="{% url 'admin_dashboard' %}">
+            <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+            <span class="title">Admin</span>
+          </a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 {% endblock %}
@@ -56,6 +66,15 @@
         <form class="" action="{% url 'edit-expense' expense.id %}" method="POST">
           {% csrf_token %}
           {% include 'partials/_messages.html' %}
+          {% if user.is_superuser %}
+            <div class="form-group">
+              <label for="amount">Owner</label>
+              <input class="form-control form-control-sm mb-3"
+                     type="text"
+                     name="username"
+                     value="{{values.owner.username}}">
+            </div>
+          {% endif %}
           <div class="form-group">
             <label for="amount">Amount</label>
             <input class="form-control form-control-sm mb-3"

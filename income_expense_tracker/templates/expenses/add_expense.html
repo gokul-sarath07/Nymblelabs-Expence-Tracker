@@ -31,6 +31,16 @@
           <span class="title">Reports</span>
         </a>
       </li>
+      {% if user.is_superuser %}
+        <li class="list">
+          <b></b>
+          <b></b>
+          <a href="{% url 'admin_dashboard' %}">
+            <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+            <span class="title">Admin</span>
+          </a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 {% endblock %}

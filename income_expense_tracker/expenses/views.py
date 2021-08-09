@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
@@ -103,9 +104,17 @@ def edit_expense(request, id):
         "values": expense,
         "categories": categories,
     }
-
     # Checks if request method is POST.
     if request.method == "POST":
+        # Checking if current user is a superuser.
+        if request.user.is_superuser:
+            # If true, then get the username from the form.
+            username_from_form = request.POST['username']
+            # Creating a user instance 
+            username = User.objects.filter(username=username_from_form)[0]
+        else:
+            # Else get the username from the request.
+            username = request.user
         amount = request.POST['amount']  # Gets amount from request.
         # Checks if amount is empty.
         if not amount:
@@ -134,7 +143,7 @@ def edit_expense(request, id):
         expense.date = date
         expense.category = category
         expense.description = description
-        expense.owner = request.user
+        expense.owner = username
         expense.save()  # Saves the record.
 
         # Sends success message to user for successfully updation.
